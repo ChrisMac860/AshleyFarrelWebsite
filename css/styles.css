@@ -318,8 +318,8 @@ ul { margin: 0 0 1em; }
   border-color: var(--ink-700);
   color: var(--ink-700);
 }
-.btn-outline::before { background: var(--ink-700); }
-.btn-outline:hover { color: #fff; }
+.btn-outline::before { background: var(--ink-50); }
+.btn-outline:hover { color: var(--ink-900); }
 
 /* On-dark secondary (used inside the ink CTA band) */
 .btn-ghost-light {
@@ -327,10 +327,10 @@ ul { margin: 0 0 1em; }
   border-color: rgba(255, 255, 255, 0.4);
   color: #fff;
 }
-.btn-ghost-light::before { background: #fff; }
+.btn-ghost-light::before { background: rgba(255, 255, 255, 0.14); }
 .btn-ghost-light:hover {
   border-color: #fff;
-  color: var(--ink-900);
+  color: #fff;
 }
 
 /* ------------------------------ Photography ------------------------------ */
@@ -564,21 +564,18 @@ ul { margin: 0 0 1em; }
   margin: var(--sp-2) 0;
   transition: color 200ms ease;
 }
-.cta-phone:hover { color: var(--text-inverse-dim); }
+.cta-phone:hover {
+  color: #fff;
+  text-decoration: underline;
+  text-decoration-thickness: 3px;
+  text-underline-offset: 10px;
+}
 
 .cta-actions {
   display: flex;
   flex-wrap: wrap;
   gap: var(--sp-3);
   margin-top: var(--sp-8);
-}
-.cta-band .btn-primary {
-  background: #fff;
-  color: var(--ink-900);
-}
-.cta-band .btn-primary:hover {
-  background: var(--ink-50);
-  color: var(--ink-900);
 }
 
 /* ------------------------------ Contact cards ------------------------------ */
@@ -767,8 +764,9 @@ a.contact-value:hover { text-decoration: underline; text-underline-offset: 3px; 
 
 /* ------------------------------ Responsive ------------------------------ */
 @media (max-width: 1023px) {
-  .nav-toggle { display: inline-flex; margin-left: auto; }
-  .header-cta { display: none; }
+  .nav-toggle { display: inline-flex; }
+  .header-cta { margin-left: auto; }
+  .header-cta .btn { padding: 11px 16px; }
 
   .main-nav {
     display: none;
