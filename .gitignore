@@ -2,3 +2,7 @@
 Thumbs.db
 Desktop.ini
 .DS_Store
+NUL
+
+# Local tooling
+.claude/

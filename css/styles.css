@@ -1,7 +1,7 @@
 /* ============================================================
    Farrell Financial Solutions
    Enterprise minimalism: Swiss/International Style, corporate
-   editorial. Ink on white, Archivo/Inter, hairline borders.
+   editorial. Ink on white, Archivo/Source Serif 4, hairline borders.
    ============================================================ */
 
 /* ------------------------------ Tokens ------------------------------ */
@@ -40,13 +40,13 @@
 
   /* Spacing scale (4px base) */
   --sp-1: 4px;  --sp-2: 8px;   --sp-3: 12px;  --sp-4: 16px;
-  --sp-6: 24px; --sp-8: 32px;  --sp-12: 48px; --sp-16: 64px;
+  --sp-5: 20px; --sp-6: 24px;  --sp-8: 32px;  --sp-12: 48px; --sp-16: 64px;
   --sp-24: 96px; --sp-32: 128px;
   --section-y: clamp(4.5rem, 9vw, 7.5rem);
 
   /* Shape (sharp) */
-  --radius: 4px;
-  --radius-sm: 2px;
+  --radius: 0;
+  --radius-sm: 0;
 
   /* Layout */
   --container: 1200px;
@@ -174,7 +174,7 @@ ul { margin: 0 0 1em; }
 
 .split {
   display: grid;
-  grid-template-columns: 1fr 1fr;
+  grid-template-columns: 7fr 5fr;
   gap: var(--sp-12);
   align-items: start;
 }
@@ -344,13 +344,13 @@ ul { margin: 0 0 1em; }
   width: 100%;
   height: 100%;
   object-fit: cover;
-  filter: saturate(0.85);
+  filter: saturate(0.62) contrast(1.03);
 }
 .photo-frame::after {
   content: "";
   position: absolute;
   inset: 0;
-  background: rgba(11, 17, 32, 0.08);
+  background: rgba(11, 17, 32, 0.12);
   pointer-events: none;
 }
 .ratio-4x3 { aspect-ratio: 4 / 3; }
@@ -366,12 +366,25 @@ ul { margin: 0 0 1em; }
 }
 .hero .grid-12 { align-items: center; }
 
-/* photo breaks the hero's bottom rule and drops into the next section */
-.hero .photo-frame { margin-bottom: -80px; }
+/* photo locks to the row bottom, then breaks the hero's rule into the next section;
+   2:1 crop keeps the terrace facade and drops the parked cars out of frame */
+.hero .photo-frame {
+  align-self: end;
+  aspect-ratio: 2 / 1;
+  margin-bottom: -160px;
+}
+.hero .photo-frame img { object-position: 50% 20%; }
 
 .hero h1 { margin-bottom: var(--sp-6); }
 
-.accent-underline { color: var(--ink-600); }
+/* Serif italic accent inside the display headline (roman/italic contrast) */
+.accent-underline {
+  font-family: var(--font-body);
+  font-style: italic;
+  font-weight: 600;
+  letter-spacing: -0.01em;
+  color: var(--ink-600);
+}
 
 .hero-actions {
   display: flex;
@@ -416,79 +429,75 @@ ul { margin: 0 0 1em; }
 .page-hero h1:last-child { margin-bottom: 0; }
 .page-lede { margin-bottom: 0; }
 
-/* ------------------------------ Cards ------------------------------ */
-.card-grid {
+/* Manifesto-scale intro on interior pages */
+.page-intro .lead {
+  font-size: clamp(1.375rem, 0.8vw + 1.125rem, 1.625rem);
+  line-height: 1.55;
+}
+
+/* ------------------------------ Index ledger ------------------------------ */
+.index-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  border-top: 1px solid var(--border);
+  counter-reset: index;
+}
+.index-list li {
+  counter-increment: index;
   display: grid;
-  grid-template-columns: repeat(4, 1fr);
-  gap: var(--grid-gap);
-}
-.card-grid-2 { grid-template-columns: repeat(2, 1fr); }
-
-.card {
-  background: var(--bg);
-  border: 1px solid var(--border);
-  border-radius: var(--radius);
-  padding: var(--sp-6);
-  transition: border-color 200ms ease;
-}
-.card:hover { border-color: var(--border-strong); }
-
-.card-icon {
-  color: var(--ink-700);
-  margin-bottom: var(--sp-4);
-}
-.card h3 { margin-bottom: 0; }
-
-/* ------------------------------ Check list ------------------------------ */
-.check-list {
-  list-style: none;
-  margin: 0;
-  padding: 0;
-}
-.check-list li {
-  display: flex;
-  align-items: flex-start;
-  gap: var(--sp-3);
-  padding: var(--sp-3) 0;
+  grid-template-columns: 2.5rem 1fr;
+  gap: var(--sp-4);
+  align-items: baseline;
+  padding: var(--sp-4) 0;
   border-bottom: 1px solid var(--border);
-  color: var(--text-700);
 }
-.check-list li:last-child { border-bottom: none; }
-
-.check {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  width: 20px;
-  height: 20px;
-  flex-shrink: 0;
-  margin-top: 3px;
-  background: var(--ink-700);
-  border-radius: var(--radius-sm);
-  color: #fff;
+.index-list li::before {
+  content: counter(index, decimal-leading-zero);
+  font-family: var(--font-display);
+  font-size: 0.8125rem;
+  font-weight: 600;
+  letter-spacing: 0.06em;
+  font-variant-numeric: tabular-nums;
+  color: var(--text-500);
+}
+.index-list h3 {
+  margin: 0;
+  font-size: 1.25rem;
+}
+.index-list-cols {
+  display: grid;
+  grid-template-rows: repeat(4, auto);
+  grid-auto-flow: column;
+  column-gap: var(--sp-16);
 }
 
-/* ------------------------------ Area tags ------------------------------ */
+/* ------------------------------ Area ledger ------------------------------ */
 .pill-grid {
-  display: flex;
-  flex-wrap: wrap;
-  gap: var(--sp-2);
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  column-gap: var(--sp-6);
   list-style: none;
   margin: 0;
   padding: 0;
+  border-top: 1px solid var(--border);
 }
 .pill-grid li {
-  background: var(--bg);
-  border: 1px solid var(--border);
-  border-radius: var(--radius-sm);
-  padding: var(--sp-2) 14px;
+  padding: var(--sp-3) 0;
+  border-bottom: 1px solid var(--border);
   font-family: var(--font-display);
-  font-size: 0.875rem;
+  font-size: 0.9375rem;
   font-weight: 500;
-  color: var(--text-900);
-  transition: border-color 200ms ease;
+  color: var(--text-700);
 }
-.pill-grid li:hover { border-color: var(--border-strong); }
+
+/* Dot-matrix area map: quiet texture, slate marks on the nine towns served */
+.area-map {
+  display: block;
+  width: 100%;
+  height: auto;
+  margin-top: var(--sp-8);
+}
 
 /* ------------------------------ Notices ------------------------------ */
 .notice-stack {
@@ -505,7 +514,7 @@ ul { margin: 0 0 1em; }
   border: 1px solid var(--border);
   border-left: 3px solid var(--ink-700);
   border-radius: var(--radius);
-  padding: 20px var(--sp-6);
+  padding: var(--sp-5) var(--sp-6);
 }
 .notice svg { flex-shrink: 0; margin-top: 2px; color: var(--ink-700); }
 .notice p { margin: 0 0 0.5em; font-size: 1rem; line-height: 1.6; }
@@ -523,14 +532,13 @@ ul { margin: 0 0 1em; }
   background: var(--bg-tint);
   border-top: 1px solid var(--border);
   border-bottom: 1px solid var(--border);
-  padding: 20px 0;
+  padding: var(--sp-5) 0;
 }
 .reg-strip .container {
   display: flex;
   align-items: flex-start;
   gap: var(--sp-3);
 }
-.reg-strip svg { flex-shrink: 0; margin-top: 2px; color: var(--ink-700); }
 .reg-strip p {
   margin: 0;
   font-family: var(--font-display);
@@ -545,20 +553,22 @@ ul { margin: 0 0 1em; }
 }
 .cta-photo {
   background:
-    linear-gradient(rgba(11, 17, 32, 0.92), rgba(11, 17, 32, 0.92)),
-    url("../assets/StockPhotos/house_2.jpg") center / cover no-repeat;
+    linear-gradient(rgba(11, 17, 32, 0.88), rgba(11, 17, 32, 0.88)),
+    url("../assets/photos/terrace-rooftops-1600.jpg") center / cover no-repeat;
 }
+/* Dim lead-in line so the phone number carries the band */
 .cta-band h2 {
-  color: #fff;
+  color: var(--text-inverse-dim);
   max-width: 24em;
 }
 .cta-phone {
   display: inline-block;
   font-family: var(--font-display);
-  font-size: clamp(2.25rem, 5vw, 3.5rem);
+  font-size: clamp(2.5rem, 7vw, 5.5rem);
+  font-variant-numeric: tabular-nums;
   font-weight: 700;
   line-height: 1.05;
-  letter-spacing: -0.02em;
+  letter-spacing: -0.025em;
   color: #fff;
   text-decoration: none;
   margin: var(--sp-2) 0;
@@ -578,23 +588,21 @@ ul { margin: 0 0 1em; }
   margin-top: var(--sp-8);
 }
 
-/* ------------------------------ Contact cards ------------------------------ */
+/* ------------------------------ Contact masthead ------------------------------ */
 .contact-grid {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
-  gap: var(--grid-gap);
+  gap: 0;
+  border-top: 1px solid var(--border-strong);
+  border-bottom: 1px solid var(--border);
 }
 
-.contact-card {
-  background: var(--bg);
-  border: 1px solid var(--border);
-  border-radius: var(--radius);
-  padding: var(--sp-8) var(--sp-6);
-  transition: border-color 200ms ease;
+.contact-card { padding: var(--sp-8) var(--sp-6) var(--sp-8) 0; }
+.contact-card + .contact-card {
+  border-left: 1px solid var(--border);
+  padding-left: var(--sp-6);
 }
-.contact-card:hover { border-color: var(--border-strong); }
-.contact-card .card-icon { margin-bottom: var(--sp-4); }
-.contact-card h3 {
+.contact-card h2 {
   font-family: var(--font-display);
   font-size: 0.8125rem;
   font-weight: 600;
@@ -605,7 +613,7 @@ ul { margin: 0 0 1em; }
 }
 .contact-value {
   font-family: var(--font-display);
-  font-size: 1.25rem;
+  font-size: clamp(1.5rem, 1.4vw + 0.9rem, 2rem);
   font-weight: 600;
   line-height: 1.4;
   color: var(--ink-900);
@@ -649,7 +657,6 @@ a.contact-value:hover { text-decoration: underline; text-underline-offset: 3px; 
   gap: var(--sp-3);
 }
 .doc-contact li + li { margin-top: var(--sp-3); }
-.doc-contact svg { flex-shrink: 0; margin-top: 4px; color: var(--ink-700); }
 
 /* ------------------------------ Footer ------------------------------ */
 .site-footer {
@@ -704,7 +711,6 @@ a.contact-value:hover { text-decoration: underline; text-underline-offset: 3px; 
   gap: var(--sp-3);
   margin-bottom: var(--sp-4);
 }
-.footer-contact svg { flex-shrink: 0; margin-top: 4px; }
 
 .footer-legal {
   border-top: 1px solid var(--border-inverse);
@@ -718,7 +724,7 @@ a.contact-value:hover { text-decoration: underline; text-underline-offset: 3px; 
   gap: var(--sp-3);
   border: 1px solid var(--border-inverse);
   border-radius: var(--radius);
-  padding: var(--sp-4) 20px;
+  padding: var(--sp-4) var(--sp-5);
   color: #fff;
 }
 .footer-warning svg { flex-shrink: 0; margin-top: 2px; color: var(--gold-300); }
@@ -748,14 +754,6 @@ a.contact-value:hover { text-decoration: underline; text-underline-offset: 3px; 
   text-decoration: underline;
   text-underline-offset: 3px;
 }
-
-/* ------------------------------ Scroll reveal ------------------------------ */
-.reveal {
-  opacity: 0;
-  transition: opacity 400ms ease;
-  transition-delay: var(--reveal-delay, 0s);
-}
-.reveal.is-visible { opacity: 1; }
 
 /* ------------------------------ Utilities ------------------------------ */
 .mt-2 { margin-top: var(--sp-4); }
@@ -791,8 +789,6 @@ a.contact-value:hover { text-decoration: underline; text-underline-offset: 3px; 
     border-bottom: none;
     box-shadow: inset 3px 0 0 var(--ink-700);
   }
-
-  .card-grid { grid-template-columns: repeat(2, 1fr); }
 }
 
 @media (max-width: 899px) {
@@ -804,6 +800,12 @@ a.contact-value:hover { text-decoration: underline; text-underline-offset: 3px; 
   .split { grid-template-columns: 1fr; }
   .footer-grid { grid-template-columns: 1fr; }
   .contact-grid { grid-template-columns: 1fr; }
+  .contact-card { padding: var(--sp-6) 0; }
+  .contact-card + .contact-card {
+    border-left: none;
+    padding-left: 0;
+    border-top: 1px solid var(--border);
+  }
 
   .photo-frame { max-width: 560px; }
   .photo-frame-sm { max-width: 384px; }
@@ -812,13 +814,19 @@ a.contact-value:hover { text-decoration: underline; text-underline-offset: 3px; 
 }
 
 @media (max-width: 640px) {
-  .card-grid, .card-grid-2 { grid-template-columns: 1fr; }
+  .index-list-cols { grid-template-rows: none; grid-auto-flow: row; }
 
   .cta-band { padding: var(--sp-16) 0; }
 
+  .hero-chips {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: var(--sp-2);
+  }
   .hero-chips li + li {
-    margin-left: var(--sp-3);
-    padding-left: var(--sp-3);
+    border-left: none;
+    margin-left: 0;
+    padding-left: 0;
   }
 }
 
@@ -829,5 +837,4 @@ a.contact-value:hover { text-decoration: underline; text-underline-offset: 3px; 
     transition-duration: 0.01ms !important;
     animation-duration: 0.01ms !important;
   }
-  .reveal { opacity: 1; }
 }
