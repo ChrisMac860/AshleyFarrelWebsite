@@ -51,7 +51,7 @@
   /* Layout */
   --container: 1200px;
   --grid-gap: 24px;
-  --header-h: 72px;
+  --header-h: 80px;
 }
 
 /* ------------------------------ Base ------------------------------ */
@@ -228,7 +228,7 @@ ul { margin: 0 0 1em; }
 
 .brand-logo {
   display: block;
-  height: 44px;
+  height: 52px;
   width: auto;
 }
 
@@ -808,6 +808,8 @@ a.contact-value:hover { text-decoration: underline; text-underline-offset: 3px; 
 }
 
 @media (max-width: 640px) {
+  .site-header .brand-logo { height: 44px; }
+
   .index-list-cols { grid-template-rows: none; grid-auto-flow: row; }
 
   .cta-band { padding: var(--sp-16) 0; }
