@@ -366,13 +366,8 @@ ul { margin: 0 0 1em; }
 }
 .hero .grid-12 { align-items: center; }
 
-/* photo locks to the row bottom, then breaks the hero's rule into the next section;
-   2:1 crop keeps the terrace facade and drops the parked cars out of frame */
-.hero .photo-frame {
-  align-self: end;
-  aspect-ratio: 2 / 1;
-  margin-bottom: -160px;
-}
+/* 2:1 editorial crop keeps the terrace facade and drops the parked cars out of frame */
+.hero .photo-frame { aspect-ratio: 2 / 1; }
 .hero .photo-frame img { object-position: 50% 20%; }
 
 .hero h1 { margin-bottom: var(--sp-6); }
@@ -554,7 +549,7 @@ ul { margin: 0 0 1em; }
 .cta-photo {
   background:
     linear-gradient(rgba(11, 17, 32, 0.88), rgba(11, 17, 32, 0.88)),
-    url("../assets/photos/terrace-rooftops-1600.jpg") center / cover no-repeat;
+    url("../assets/photos/terrace-rooftops-1600.webp") center / cover no-repeat;
 }
 /* Dim lead-in line so the phone number carries the band */
 .cta-band h2 {
@@ -810,7 +805,6 @@ a.contact-value:hover { text-decoration: underline; text-underline-offset: 3px; 
   .photo-frame { max-width: 560px; }
   .photo-frame-sm { max-width: 384px; }
 
-  .hero .photo-frame { margin-bottom: 0; }
 }
 
 @media (max-width: 640px) {
