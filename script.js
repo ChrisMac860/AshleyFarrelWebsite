@@ -61,7 +61,7 @@
       String(data.get('message') || 'No additional details provided.')
     ].join('\n'));
 
-    status.textContent = 'Opening your email application…';
+    if (status) status.textContent = 'Opening your email application…';
     window.location.href = `mailto:Ashley@farrellfs.co.uk?subject=${subject}&body=${body}`;
   });
 
