@@ -167,7 +167,7 @@ address { color: rgba(255,255,255,.82); }
 
 .site-footer { background: #071c29; color: var(--white); }
 .footer-top { display: grid; grid-template-columns: 1fr 1fr; gap: 100px; padding: 80px 0 50px; }
-.footer-brand img { width: 285px; filter: brightness(0) invert(1); opacity: .95; }
+.footer-brand img { width: 285px; }
 .footer-brand p { max-width: 380px; color: rgba(255,255,255,.58); }
 .footer-links { display: grid; grid-template-columns: 1fr 1fr; gap: 50px; }
 .footer-links h2 { margin: 0 0 16px; color: var(--blue); font-family: inherit; font-size: 11px; letter-spacing: .14em; text-transform: uppercase; }
